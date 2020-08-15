@@ -1,10 +1,10 @@
-from flask import Flask
+from flask import (Flask, redirect)
 from .modules import author
 
 def setup_routes(app):
   @app.route('/')
   def home():
-    return 'Hi!'
+    return redirect('/authors')
 
 def create_app():
   app = Flask(__name__, static_folder='static')
