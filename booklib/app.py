@@ -7,7 +7,7 @@ def setup_routes(app):
     return 'Hi!'
 
 def create_app():
-  app = Flask(__name__)
+  app = Flask(__name__, static_folder='static')
 
   setup_routes(app)
 

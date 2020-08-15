@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Edit {{ author['name'] }}</title>
-</head>
-<body>
-  <h1>Edit {{ author['name'] }}</h1>
+{% extends 'base.html' %}
 
-  <form action="{{ url_for('author.edit', id=author['id']) }}" method="post" enctype="multipart/form-data">
-    <input type="text" name="name" value="{{ author['name'] }}">
-    <button>Update</button>
-  </form>
-</body>
-</html>
+{% block content %}
+  <section class="px-4">
+    <h1 class="font-bold mb-8 mt-4 text-4xl">Edit {{ author['name'] }}</h1>
+
+    <form action="{{ url_for('author.edit', id=author['id']) }}" method="post" enctype="multipart/form-data">
+      <div class="mb-2">
+        <input class="px-3 py-2 border rounded" placeholder="Author's name" type="text" name="name" value="{{ author['name'] }}" autofocus>
+      </div>
+      <button class="px-2 py-1 rounded bg-blue-500 text-white">Update</button>
+    </form>
+  </section>
+{% endblock %}
