@@ -9,6 +9,7 @@ verify_ssl = true
 flask = "*"
 gunicorn = "*"
 mysql-connector-python = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,12 +1,17 @@
+import os
 import mysql.connector
+
+db_config = {
+  'user': os.getenv('MYSQL_USER'),
+  'password': os.getenv('MYSQL_PASSWORD'),
+  'host': os.getenv('MYSQL_HOST'),
+  'database': os.getenv('MYSQL_DBNAME'),
+}
 
 class BaseRepo:
   def __init__(self):
     self.cnx = mysql.connector.connect(
-      user='root',
-      password='password',
-      host='127.0.0.1',
-      database='book-lib-app'
+      **db_config
     )
 
   def execute(self, query, params = None):
