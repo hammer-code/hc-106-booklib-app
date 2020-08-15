@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>List of authors</title>
+</head>
+<body>
+  <h1>List of authors</h1>
+
+  <a href="{{ url_for('author.create') }}">Add new</a>
+  <ul id="list">
+    {% for item in authors %}
+    <li>{{ item['name'] }} <a href="{{ url_for('author.edit', id=item['id']) }}">Edit</a>  <button data-id="{{ item['id'] }}" onclick="handleDelete(event)">Delete</button>  </li>
+    {% endfor %}
+  </ul>
+
+  <script>
+    var list = document.querySelector('#list');
+    function handleDelete (e) {
+      var id = e.target.getAttribute('data-id');
+      var li = e.target.parentNode;
+      if (!confirm('Are you sure want to delete this?')) {
+        return;
+      }
+      fetch('/authors/delete/' + id, {
+        method: 'POST',
+      })
+        .then(() => {
+          list.removeChild(li);
+        });
+    }
+  </script>
+</body>
+</html>

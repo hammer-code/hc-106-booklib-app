@@ -16,6 +16,10 @@ class AuthorRepo(BaseRepo):
     return self.execute("INSERT INTO authors (name) VALUES (%s)", (name,))\
       .commit()
 
+  def findById(self, id):
+    return self.execute("SELECT * FROM authors WHERE id = %s", (id,))\
+      .to_item(lambda row: dict(id=row[0], name=row[1]))
+
   def update(self, id, data):
     query = "UPDATE authors SET "
     params, sets = [], []

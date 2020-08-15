@@ -19,6 +19,13 @@ class BaseRepo:
     self.cnx.commit()
 
     return self
+  
+  def to_item(self, transform_cb):
+    row = self.cursor.fetchone()
+
+    self.cursor.close()
+
+    return transform_cb(row)
 
   def to_array(self, transform_cb):
     result = []

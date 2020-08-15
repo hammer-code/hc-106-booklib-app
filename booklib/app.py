@@ -1,5 +1,6 @@
 from flask import Flask
 from .repo import AuthorRepo
+from .modules import author
 
 author_repo = AuthorRepo()
 
@@ -16,5 +17,7 @@ def create_app():
   app = Flask(__name__)
 
   setup_routes(app)
+
+  app.register_blueprint(author.bp)
 
   return app
