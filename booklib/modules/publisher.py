@@ -1,36 +1,36 @@
-from booklib.repo import AuthorRepo
 from flask import(
   Blueprint, render_template, request, redirect, jsonify
 )
 from booklib.db import cnx
+from booklib.repo.publisher import PublisherRepo
+bp = Blueprint('publisher', __name__, url_prefix='/publishers', template_folder="views")
 
-bp = Blueprint('author', __name__, url_prefix='/authors', template_folder="views")
+repo = PublisherRepo(cnx)
 
-repo = AuthorRepo(cnx)
-  
 @bp.route('/')
 def index():
-  authors = repo.findAll()
-  return render_template('author/index.html', authors=authors)
+  publishers = repo.findAll()
+
+  return render_template('publisher/index.html',publishers=publishers)
 
 @bp.route('/create', methods=('GET', 'POST'))
 def create():
   if request.method == 'POST':
     data = { 'name': request.form['name'] }
     repo.create(request.form['name'])
-    return redirect('/authors')
+    return redirect('/publishers')
   
-  return render_template('author/create.html')
+  return render_template('publisher/create.html')
 
 @bp.route('/edit/<id>', methods=('GET', 'POST'))
 def edit(id):
   if request.method == 'POST':
     name = request.form['name']
     repo.update(id, { 'name': name })
-    return redirect('/authors')
+    return redirect('/publishers')
   
-  author = repo.findById(id)
-  return render_template('author/edit.html', author=author)
+  publisher = repo.findById(id)
+  return render_template('publisher/edit.html', publisher=publisher)
 
 
 @bp.route('/delete/<id>', methods=['POST'])

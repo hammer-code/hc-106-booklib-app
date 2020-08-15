@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="px-4">
+    <h1 class="font-bold mb-8 mt-4 text-4xl">Edit {{ publisher['name'] }}</h1>
+
+    <form action="{{ url_for('publisher.edit', id=publisher['id']) }}" method="post" enctype="multipart/form-data">
+      <div class="mb-2">
+        <input class="px-3 py-2 border rounded" placeholder="Publisher's name" type="text" name="name" value="{{ publisher['name'] }}" autofocus>
+      </div>
+      <button class="px-2 py-1 rounded bg-blue-500 text-white">Update</button>
+    </form>
+  </section>
+{% endblock %}

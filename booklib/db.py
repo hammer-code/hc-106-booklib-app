@@ -1,6 +1,7 @@
 import os
 import mysql.connector
 from flask import g
+from werkzeug.local import LocalProxy
 
 db_config = {
   'user': os.getenv('MYSQL_USER'),
@@ -15,3 +16,5 @@ def get_db():
     g.cnx = cnx
 
   return g.cnx
+
+cnx = LocalProxy(get_db)
