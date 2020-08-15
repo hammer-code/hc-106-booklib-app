@@ -3,7 +3,7 @@ from flask import Flask
 def setup_routes(app):
   @app.route('/')
   def home():
-    return "Hello"
+    return "Hi"
 
 def create_app():
   app = Flask(__name__)

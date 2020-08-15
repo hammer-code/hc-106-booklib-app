@@ -1,0 +1,2 @@
+https://medium.com/ymedialabs-innovation/deploy-flask-app-with-nginx-using-gunicorn-and-supervisor-d7a93aa07c18#:~:text=Use%20supervisor,are%20started%20at%20boot%20time.
+https://www.youtube.com/watch?v=goToXTC96Co
