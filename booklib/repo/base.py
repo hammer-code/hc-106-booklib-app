@@ -1,18 +1,6 @@
-import os
-import mysql.connector
-
-db_config = {
-  'user': os.getenv('MYSQL_USER'),
-  'password': os.getenv('MYSQL_PASSWORD'),
-  'host': os.getenv('MYSQL_HOST'),
-  'database': os.getenv('MYSQL_DBNAME'),
-}
-
 class BaseRepo:
-  def __init__(self):
-    self.cnx = mysql.connector.connect(
-      **db_config
-    )
+  def __init__(self, cnx):
+    self.cnx = cnx
 
   def execute(self, query, params = None):
     self.cursor = self.cnx.cursor()

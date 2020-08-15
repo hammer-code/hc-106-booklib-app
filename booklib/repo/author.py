@@ -1,8 +1,8 @@
 from .base import BaseRepo
 
 class AuthorRepo(BaseRepo):
-  def __init__(self):
-    BaseRepo.__init__(self)
+  def __init__(self, cnx):
+    BaseRepo.__init__(self, cnx)
 
   def findAll(self, limit = 10):
     def transform (row):

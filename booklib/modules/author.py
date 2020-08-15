@@ -2,10 +2,13 @@ from booklib.repo import AuthorRepo
 from flask import(
   Blueprint, render_template, request, redirect, jsonify
 )
+from werkzeug.local import LocalProxy
+from booklib.db import get_db
 
 bp = Blueprint('author', __name__, url_prefix='/authors', template_folder="views")
 
-repo = AuthorRepo()
+cnx = LocalProxy(get_db)
+repo = AuthorRepo(cnx)
   
 @bp.route('/')
 def index():
