@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.26)
 # Database: book-lib-app
-# Generation Time: 2020-08-14 13:03:07 +0000
+# Generation Time: 2020-08-16 01:25:18 +0000
 # ************************************************************
 
 
@@ -36,10 +36,63 @@ LOCK TABLES `authors` WRITE;
 
 INSERT INTO `authors` (`id`, `name`)
 VALUES
-	(1,'John Doe'),
-	(2,'Jane Doe');
+	(19,'Uncle Bob'),
+	(20,'Martin Fowler'),
+	(24,'Kent Beck');
 
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table books
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `books`;
+
+CREATE TABLE `books` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `publisher_id` int(11) unsigned NOT NULL,
+  `published_at` date NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `fk_publisher_id` (`publisher_id`),
+  CONSTRAINT `fk_publisher_id` FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `books` WRITE;
+/*!40000 ALTER TABLE `books` DISABLE KEYS */;
+
+INSERT INTO `books` (`id`, `publisher_id`, `published_at`, `title`)
+VALUES
+	(1,1,'2020-01-01','Refactoring'),
+	(2,2,'2020-01-02','The Pragmatic Programmer'),
+	(4,1,'2020-12-31','Automation With Python');
+
+/*!40000 ALTER TABLE `books` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table publishers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `publishers`;
+
+CREATE TABLE `publishers` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `publishers` WRITE;
+/*!40000 ALTER TABLE `publishers` DISABLE KEYS */;
+
+INSERT INTO `publishers` (`id`, `name`)
+VALUES
+	(1,'O\'Riley X'),
+	(2,'Packt Pub'),
+	(4,'Gramedia');
+
+/*!40000 ALTER TABLE `publishers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

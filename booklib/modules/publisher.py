@@ -3,8 +3,8 @@ from flask import(
 )
 from booklib.db import cnx
 from booklib.repo.publisher import PublisherRepo
-bp = Blueprint('publisher', __name__, url_prefix='/publishers', template_folder="views")
 
+bp = Blueprint('publisher', __name__, url_prefix='/publishers', template_folder="views")
 repo = PublisherRepo(cnx)
 
 @bp.route('/')

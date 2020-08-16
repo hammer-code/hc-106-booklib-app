@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="px-4">
+    <h1 class="font-bold text-4xl mb-8 mt-4">List of books</h1>
+    <a class="px-4 py-2 bg-blue-500 rounded text-white" href="{{ url_for('book.create') }}">Add new</a>
+    <table class="mt-4 w-full">
+      <thead>
+        <tr>
+          <th class="p-2 text-left">Title</th>
+          <th class="p-2 text-left">Publisher</th>
+          <th class="p-2 text-left">Published At</th>
+          <th class="p-2 text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="list">
+        {% for item in books %}
+        <tr class="hover:bg-blue-100">
+          <td class="p-2">{{ item['title'] }}</td> 
+          <td class="p-2">{{ item['publisher_name'] }}</td> 
+          <td class="p-2">{{ item['published_at'] }}</td> 
+          <td class="p-2 text-right">
+            <a class="px-2 text-yellow-500" href="{{ url_for('book.edit', id=item['id']) }}">Edit</a>
+            <button class="px-2 text-red-700" data-id="{{ item['id'] }}" onclick="handleDelete(event)">Delete</button>
+          </td>  
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+{% block assets %}
+  <script>
+    var list = document.querySelector('#list');
+    function handleDelete (e) {
+      var id = e.target.getAttribute('data-id');
+      var tr = e.target.parentNode.parentNode;
+      if (!confirm('Are you sure want to delete this?')) {
+        return;
+      }
+      fetch('/books/delete/' + id, {
+        method: 'POST',
+      })
+        .then(() => {
+          list.removeChild(tr);
+        });
+    }
+  </script>
+{% endblock %}
+  

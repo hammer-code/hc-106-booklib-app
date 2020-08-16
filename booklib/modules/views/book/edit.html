@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <section class="px-4">
+    <h1 class="font-bold mt-4 mb-8 text-4xl">Edit {{ book['title'] }}</h1>
+
+    <form method="post" action="{{ url_for('book.edit', id=book['id']) }}" enctype="multipart/form-data">
+      <div class="mb-2">
+        <label for="block">Title</label>
+        <div>
+          <input class="px-3 py-2 border rounded" placeholder="Book's title" type="text" name="title" value="{{ book['title'] }}" autofocus>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label for="block">Publisher</label>
+        <div>
+          <select class="px-3 py-2 border rounded" name="publisher_id">
+            <option value="">Select a publisher</option>
+            {% for publisher in publishers %}
+            <option{%if publisher['id'] == book['publisher_id'] %} selected{% endif %} value="{{ publisher['id'] }}">{{ publisher['name'] }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-2">
+        <label for="block">Published At</label>
+        <div>
+          <input class="px-3 py-2 border rounded" type="date" value="{{ book['published_at'] }}" name="published_at">
+        </div>
+      </div>
+      
+      <button class="px-2 py-1 rounded bg-blue-500 text-white">Submit</button>
+    </form>
+  </section>
+{% endblock %}
