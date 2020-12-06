@@ -9,7 +9,8 @@ repo = PublisherRepo(cnx)
 
 @bp.route('/')
 def index():
-  publishers = repo.findAll()
+  page = request.args.get('page') or '1'
+  publishers = repo.findAll(page=int(page))
 
   return render_template('publisher/index.html',publishers=publishers)
 

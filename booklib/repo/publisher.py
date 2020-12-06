@@ -4,12 +4,14 @@ class PublisherRepo(BaseRepo):
   def __init__(self, cnx):
     BaseRepo.__init__(self, cnx)
 
-  def findAll(self, limit = 10):
+  def findAll(self, limit = 3, page = 1):
     def transform (row):
       (id, name) = row
       return { 'id': id, 'name': name }
 
-    return self.execute("SELECT * from publishers")\
+    offset = (page - 1) * limit
+
+    return self.execute("SELECT * from publishers LIMIT %s,%s",(offset, limit))\
       .to_array(transform)
 
   def create(self, name):
