@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
-# Host: 127.0.0.1 (MySQL 5.7.26)
+# Host: 127.0.0.1 (MySQL 5.7.32)
 # Database: book-lib-app
-# Generation Time: 2020-08-16 01:25:18 +0000
+# Generation Time: 2020-12-06 05:46:15 +0000
 # ************************************************************
 
 
@@ -44,6 +44,35 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table publishers
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `publishers`;
+
+CREATE TABLE `publishers` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `publishers` WRITE;
+/*!40000 ALTER TABLE `publishers` DISABLE KEYS */;
+
+INSERT INTO `publishers` (`id`, `name`)
+VALUES
+	(1,'O\'Riley X'),
+	(2,'Packt Pub'),
+	(4,'Gramedia'),
+	(5,'Publisher 1'),
+	(6,'Publisher 2'),
+	(7,'Publisher 3'),
+	(8,'Awesome');
+
+/*!40000 ALTER TABLE `publishers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
 # Dump of table books
 # ------------------------------------------------------------
 
@@ -70,31 +99,6 @@ VALUES
 
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
-
-
-# Dump of table publishers
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `publishers`;
-
-CREATE TABLE `publishers` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `publishers` WRITE;
-/*!40000 ALTER TABLE `publishers` DISABLE KEYS */;
-
-INSERT INTO `publishers` (`id`, `name`)
-VALUES
-	(1,'O\'Riley X'),
-	(2,'Packt Pub'),
-	(4,'Gramedia');
-
-/*!40000 ALTER TABLE `publishers` ENABLE KEYS */;
-UNLOCK TABLES;
-
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
